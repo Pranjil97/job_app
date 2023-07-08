@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Recruitment Solution App - Candidate Search</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html">Candidate Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="sectionSearch">
+        <form id="search-form">
+            <input type="text" id="job-role" name="job-role" placeholder="Job Role">
+            <input type="text" id="location" name="location" placeholder="Location">
+            <input id="schbtn" type="submit" value="Search">
+        </form>
+
+        <div id="search-results">
+            <!-- Display search results dynamically using JavaScript -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Recruitment Solution App</p>
+    </footer>
+
+    <script>
+
+        document.getElementById("search-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get user input values
+            var location = document.getElementById("location").value;
+            var jobRole = document.getElementById("job-role").value;
+
+            if (location == "" && jobRole == "") {
+                alert("Please enter location and job role");
+                return false;
+            }
+
+            // Call function to fetch job results based on location and job role
+            var jobResults = fetchJobResults(location, jobRole);
+
+            // Display job results in the search-results section
+            var searchResultsContainer = document.getElementById("search-results");
+            searchResultsContainer.innerHTML = ""; // Clear previous results
+
+            if (jobResults.length === 0) {
+                var noResultsMessage = document.createElement("p");
+                noResultsMessage.textContent = "No jobs found for the given location and job role.";
+                searchResultsContainer.appendChild(noResultsMessage);
+            } else {
+                jobResults.forEach(function (job) {
+                    var jobItem = document.createElement("div");
+                    jobItem.classList.add("job-item");
+
+
+                    var jobTitle = document.createElement("h3");
+                    jobTitle.textContent = job.title;
+                    jobItem.appendChild(jobTitle);
+
+                    var jobDescription = document.createElement("p");
+                    jobDescription.textContent = "Name: " + job.name;
+                    jobItem.appendChild(jobDescription);
+
+                    var jobLocation = document.createElement("p");
+                    jobLocation.textContent = "Location: " + job.location;
+                    jobItem.appendChild(jobLocation);
+                    searchResultsContainer.appendChild(jobItem);
+                });
+            }
+        });
+
+        function fetchJobResults(location, jobRole) {
+            // Dummy data for job results
+            var jobs = [
+                {
+                    title: "Web Developer",
+                    location: "New York",
+                    name: "Jane Smith"
+                },
+                {
+                    title: "Software Developer",
+                    location: "New York",
+                    name: "John Doe"
+                },
+                {
+                    title: "Data Analyst",
+                    location: "New York",
+                    name: "John Doe"
+                },
+                {
+                    title: "Web Developer",
+                    location: "San Francisco",
+                    name: "Smith Richard"
+                },
+                {
+                    title: "Data Analyst",
+                    location: "Chicago",
+                    name: "John Doe"
+                }
+            ];
+
+            // Filter job results based on location and/or job role
+            var filteredJobs = jobs.filter(function (job) {
+                var isLocationMatch = true;
+                var isJobRoleMatch = true;
+
+                if (location && location.toLowerCase() !== job.location.toLowerCase()) {
+                    isLocationMatch = false;
+                }
+
+                if (jobRole && jobRole.toLowerCase() !== job.title.toLowerCase()) {
+                    isJobRoleMatch = false;
+                }
+
+                return isLocationMatch && isJobRoleMatch;
+            });
+
+            return filteredJobs;
+        }
+    </script>
+</body>
+
+</html>

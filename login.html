@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Recruitment Solution App - Login/Register</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="sectionLogin">
+        <div id="loginForm">
+            <h2>Log in</h2>
+            <div class="loginformsub">
+                <div>
+                    <img id="logingithub" src="./images/linkedin.png" alt="linkedin" />
+                    LinkedIn
+                </div>
+                <div>
+                    <img id="logingithub" src="./images/github.png" alt="github" />
+                    GitHub
+                </div>
+            </div>
+            <form class="loginform" id="login-form" onsubmit="return login()">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <div class="logincheckbox">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <input id="loginbtn" type="submit" value="Log in">
+                <p>Forgot password?</p>
+                <div class="loginformsub2">
+                    <span>Not a member yet?</span>
+                    <p onclick="showRegisterForm()">Sign up</p>
+                </div>
+            </form>
+        </div>
+
+        <div id="registerForm" style="display: none;">
+            <form class="registerform" onsubmit="return register()">
+                <h2>Register</h2>
+                <input type="text" id="company-name" name="company-name" placeholder="Company Name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="password" required>
+                <input id="registerbtn" type="submit" value="Register">
+                <button onclick="showLoginForm()">Login</button>
+            </form>
+        </div>
+
+        <div id="success-message" style="display: none;">
+            <p id="message"></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Recruitment Solution App</p>
+    </footer>
+
+    <script>
+        function showRegisterForm() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+        }
+
+        function showLoginForm() {
+            document.getElementById("registerForm").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+        }
+
+        function login() {
+            // Get form inputs
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Dummy data for login
+            var dummyUsername = "pranjil";
+            var dummyPassword = "password";
+
+            // Check if username and password match the dummy data
+            if (username === dummyUsername && password === dummyPassword) {
+                alert("Login successful!");
+                window.location.href = "search.html";
+            } else {
+                alert("Invalid username or password.");
+            }
+
+            return false; // Prevent form submission
+        }
+
+        function register() {
+            // Get form inputs
+            var companyName = document.getElementById("company-name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // // Dummy data for registration
+            // var dummyCompanyName = "Company XYZ";
+            // var dummyEmail = "pranjil@example.com";
+            // var dummyPassword = "password";
+
+            // Check if form inputs match the dummy data
+            // if (companyName === dummyCompanyName && email === dummyEmail && password === dummyPassword) {
+            // displaySuccessMessage("Registration successful!");
+            // } else {
+            //     alert("Registration failed. Please check your inputs.");
+            // }
+            alert("Registration successful!");
+            window.location.href = "login.html";
+            return false; // Prevent form submission
+        }
+
+        function displaySuccessMessage(message) {
+            document.getElementById("message").textContent = message;
+            document.getElementById("success-message").style.display = "block";
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
