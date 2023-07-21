@@ -75,7 +75,7 @@ nav ul li {
     nav ul li a:hover {
         font-weight: 600;
         color: #2d276b;
-    border: 1px solid #302b63;
+    /* border: 1px solid #302b63; */
   }
   
   nav ul li a.active {
